@@ -1,0 +1,141 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 560" fill="none">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="60%">
+      <stop offset="0%" stop-color="#c8b282" stop-opacity="0.09"/>
+      <stop offset="100%" stop-color="#08070a" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#c8b282" stop-opacity="0.32"/>
+      <stop offset="100%" stop-color="#c8b282" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="frontFace" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#191510"/>
+      <stop offset="100%" stop-color="#0e0c09"/>
+    </linearGradient>
+    <linearGradient id="rightFace" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#141008"/>
+      <stop offset="100%" stop-color="#0b0906"/>
+    </linearGradient>
+    <linearGradient id="topFace" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#1c1710"/>
+      <stop offset="100%" stop-color="#272015"/>
+    </linearGradient>
+    <linearGradient id="lidFace" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1f1a12"/>
+      <stop offset="100%" stop-color="#2c2318"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="560" fill="#08070a"/>
+  <rect width="600" height="560" fill="url(#bg)"/>
+
+  <!-- Halo glow at box opening -->
+  <ellipse cx="302" cy="188" rx="125" ry="58" fill="url(#glow)" opacity="0.55"/>
+
+  <!-- ── BOX BODY ── -->
+
+  <!-- Front face -->
+  <path d="M145,248 L365,248 L365,448 L145,448 Z" fill="url(#frontFace)" stroke="#c8b282" stroke-width="1.3" stroke-linejoin="round"/>
+
+  <!-- Right face -->
+  <path d="M365,248 L465,183 L465,383 L365,448 Z" fill="url(#rightFace)" stroke="#c8b282" stroke-width="1.3" stroke-linejoin="round"/>
+
+  <!-- Top opening (interior) -->
+  <path d="M145,248 L245,183 L465,183 L365,248 Z" fill="url(#topFace)" stroke="#c8b282" stroke-width="1.3" stroke-linejoin="round"/>
+
+  <!-- Inner glow wash on top face -->
+  <path d="M147,247 L245,184 L463,184 L363,247 Z" fill="url(#glow)" opacity="0.22"/>
+
+  <!-- ── OPEN LID ── -->
+  <path d="M245,183 L465,183 L494,52 L274,52 Z" fill="url(#lidFace)" stroke="#c8b282" stroke-width="1.3" stroke-linejoin="round"/>
+
+  <!-- Lid right edge -->
+  <path d="M465,183 L494,52 L502,59 L473,190 Z" fill="#0e0c08" stroke="#c8b282" stroke-width="0.9" stroke-linejoin="round"/>
+
+  <!-- Lid top edge -->
+  <path d="M274,52 L494,52 L502,59 L282,59 Z" fill="#151108" stroke="#c8b282" stroke-width="0.9" stroke-linejoin="round"/>
+
+  <!-- ── RIBBON ── -->
+
+  <!-- Front vertical ribbon -->
+  <rect x="248" y="248" width="18" height="200" fill="#c8b282" fill-opacity="0.07" stroke="#c8b282" stroke-width="0.8" stroke-opacity="0.55"/>
+
+  <!-- Front horizontal ribbon -->
+  <rect x="145" y="328" width="220" height="17" fill="#c8b282" fill-opacity="0.07" stroke="#c8b282" stroke-width="0.8" stroke-opacity="0.55"/>
+
+  <!-- Right face horizontal ribbon (diagonal) -->
+  <path d="M365,328 L465,268 L465,285 L365,345 Z" fill="#c8b282" fill-opacity="0.06" stroke="#c8b282" stroke-width="0.8" stroke-opacity="0.45"/>
+
+  <!-- Ribbon on top face continuation -->
+  <path d="M248,248 L257,248 L309,184 L300,184 Z" fill="#c8b282" fill-opacity="0.06" stroke="#c8b282" stroke-width="0.6" stroke-opacity="0.35"/>
+
+  <!-- ── BOW ── -->
+  <!-- Left loop -->
+  <path d="M257,336 C235,310 212,312 222,327 C232,343 252,338 257,336" stroke="#c8b282" stroke-width="1.2" stroke-linecap="round"/>
+  <!-- Right loop -->
+  <path d="M257,336 C279,310 302,312 292,327 C282,343 263,338 257,336" stroke="#c8b282" stroke-width="1.2" stroke-linecap="round"/>
+  <!-- Left tail -->
+  <path d="M257,336 L238,360" stroke="#c8b282" stroke-width="1.1" stroke-linecap="round" opacity="0.75"/>
+  <!-- Right tail -->
+  <path d="M257,336 L274,362" stroke="#c8b282" stroke-width="1.1" stroke-linecap="round" opacity="0.75"/>
+  <!-- Knot -->
+  <circle cx="257" cy="336" r="3" fill="#c8b282" opacity="0.45"/>
+
+  <!-- ── ITEMS PEEKING FROM OPENING ── -->
+
+  <!-- Plant stem + leaves -->
+  <path d="M312,176 C310,158 316,140 308,124" stroke="#c8b282" stroke-width="1.1" stroke-linecap="round" opacity="0.5"/>
+  <path d="M308,147 C297,135 282,134 289,146 C296,158 306,152 308,147" stroke="#c8b282" stroke-width="1" stroke-linecap="round" fill="none" opacity="0.48"/>
+  <path d="M311,139 C321,126 336,125 330,137 C324,149 313,144 311,139" stroke="#c8b282" stroke-width="1" stroke-linecap="round" fill="none" opacity="0.48"/>
+  <path d="M310,130 C306,117 308,105 310,96" stroke="#c8b282" stroke-width="0.8" stroke-linecap="round" opacity="0.38"/>
+
+  <!-- Journal / stationery peeking up -->
+  <rect x="178" y="130" width="44" height="58" rx="1" stroke="#c8b282" stroke-width="1" opacity="0.48"/>
+  <rect x="184" y="130" width="5" height="58" fill="#c8b282" fill-opacity="0.06" stroke="#c8b282" stroke-width="0.5" opacity="0.55"/>
+  <line x1="195" y1="145" x2="218" y2="145" stroke="#c8b282" stroke-width="0.6" opacity="0.32"/>
+  <line x1="195" y1="154" x2="218" y2="154" stroke="#c8b282" stroke-width="0.6" opacity="0.32"/>
+  <line x1="195" y1="163" x2="218" y2="163" stroke="#c8b282" stroke-width="0.6" opacity="0.32"/>
+  <line x1="195" y1="172" x2="213" y2="172" stroke="#c8b282" stroke-width="0.6" opacity="0.32"/>
+
+  <!-- Envelope -->
+  <rect x="390" y="132" width="62" height="46" rx="1" stroke="#c8b282" stroke-width="1" opacity="0.5"/>
+  <path d="M390,132 L421,157 L452,132" stroke="#c8b282" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+
+  <!-- Tissue paper fold -->
+  <path d="M168,183 C185,177 202,184 218,179 C234,174 248,180 248,180" stroke="#c8b282" stroke-width="1.3" stroke-linecap="round" opacity="0.3"/>
+  <path d="M365,190 C382,186 399,192 418,188 C437,184 452,190 464,187" stroke="#c8b282" stroke-width="1" stroke-linecap="round" opacity="0.25"/>
+
+  <!-- ── DECORATIVE ELEMENTS ── -->
+
+  <!-- KIN-style star near lid -->
+  <g transform="translate(374,60)" opacity="0.92">
+    <line x1="0" y1="-10" x2="0" y2="10" stroke="#c8b282" stroke-width="1.3" stroke-linecap="round"/>
+    <line x1="-10" y1="0" x2="10" y2="0" stroke="#c8b282" stroke-width="1.3" stroke-linecap="round"/>
+    <line x1="-6" y1="-6" x2="6" y2="6" stroke="#c8b282" stroke-width="0.9" stroke-linecap="round"/>
+    <line x1="6" y1="-6" x2="-6" y2="6" stroke="#c8b282" stroke-width="0.9" stroke-linecap="round"/>
+  </g>
+
+  <!-- Small sparkles -->
+  <g transform="translate(504,148)" opacity="0.45">
+    <line x1="0" y1="-6" x2="0" y2="6" stroke="#c8b282" stroke-width="1" stroke-linecap="round"/>
+    <line x1="-6" y1="0" x2="6" y2="0" stroke="#c8b282" stroke-width="1" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(116,175)" opacity="0.38">
+    <line x1="0" y1="-5" x2="0" y2="5" stroke="#c8b282" stroke-width="0.9" stroke-linecap="round"/>
+    <line x1="-5" y1="0" x2="5" y2="0" stroke="#c8b282" stroke-width="0.9" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(88,302)" opacity="0.22">
+    <line x1="0" y1="-5" x2="0" y2="5" stroke="#c8b282" stroke-width="0.8" stroke-linecap="round"/>
+    <line x1="-5" y1="0" x2="5" y2="0" stroke="#c8b282" stroke-width="0.8" stroke-linecap="round"/>
+    <line x1="-3" y1="-3" x2="3" y2="3" stroke="#c8b282" stroke-width="0.6" stroke-linecap="round"/>
+    <line x1="3" y1="-3" x2="-3" y2="3" stroke="#c8b282" stroke-width="0.6" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(524,330)" opacity="0.22">
+    <line x1="0" y1="-5" x2="0" y2="5" stroke="#c8b282" stroke-width="0.8" stroke-linecap="round"/>
+    <line x1="-5" y1="0" x2="5" y2="0" stroke="#c8b282" stroke-width="0.8" stroke-linecap="round"/>
+  </g>
+
+  <!-- Ground shadow -->
+  <ellipse cx="295" cy="460" rx="198" ry="12" fill="#c8b282" fill-opacity="0.03"/>
+</svg>
