@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>KIN · Der erste Tag, der bleibt: Das Onboarding-Playbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --dark:    #08070a;
+    --surface: #111010;
+    --surface2: #191614;
+    --gold:    #c8b282;
+    --gold-dim: rgba(200,178,130,0.10);
+    --cream:   #e4ddd1;
+    --muted:   #7a7269;
+    --border:  rgba(200,178,130,0.16);
+    --serif:   'Cormorant Garamond', Georgia, serif;
+    --sans:    'Inter', system-ui, sans-serif;
+  }
+
+  html, body {
+    background: #08070a;
+    color: var(--cream);
+    font-family: var(--sans);
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .doc { max-width: 794px; margin: 0 auto; background: var(--dark); }
+  .sheet { padding: 56px 64px 60px; }
+
+  .page-sep {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 0 64px;
+    height: 48px;
+    background: #050507;
+    border-top: 1px dashed rgba(200,178,130,0.12);
+    border-bottom: 1px dashed rgba(200,178,130,0.12);
+  }
+  .page-sep::before, .page-sep::after { content: ''; flex: 1; height: 1px; background: rgba(200,178,130,0.10); }
+  .page-sep span { font-size: 8px; letter-spacing: 3.5px; text-transform: uppercase; color: rgba(200,178,130,0.25); white-space: nowrap; }
+
+  .running-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 36px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .running-header span:first-child { font-size: 8px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); }
+  .running-header span:last-child { font-size: 8px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); }
+
+  .doc-header { display: flex; align-items: flex-start; justify-content: space-between; padding-bottom: 28px; border-bottom: 1px solid var(--border); margin-bottom: 36px; gap: 24px; }
+  .doc-eyebrow { font-size: 9px; letter-spacing: 3.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+  .doc-title { font-family: var(--serif); font-size: 28px; font-weight: 300; line-height: 1.2; color: var(--cream); }
+  .doc-subtitle { margin-top: 10px; font-size: 12px; color: var(--muted); line-height: 1.6; max-width: 440px; }
+  .logo-svg { width: 60px; flex-shrink: 0; opacity: 0.65; margin-top: 4px; }
+
+  .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 32px; }
+  .stat-card { background: var(--surface); border: 1px solid var(--border); padding: 22px 18px; }
+  .stat-card.highlight { border-color: rgba(200,178,130,0.32); background: var(--gold-dim); }
+  .stat-num { font-family: var(--serif); font-size: 30px; font-weight: 300; color: var(--gold); line-height: 1.1; margin-bottom: 12px; }
+  .stat-desc { font-size: 11.5px; line-height: 1.65; color: var(--muted); }
+
+  .section-label { font-size: 8.5px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+
+  /* Email templates */
+  .template-stack { display: flex; flex-direction: column; gap: 14px; margin-bottom: 32px; }
+  .template-card { background: var(--surface); border: 1px solid var(--border); border-top: 2px solid var(--gold); padding: 20px 22px; }
+  .template-pill { display: inline-block; font-size: 8px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); background: var(--gold-dim); padding: 3px 8px; margin-bottom: 12px; }
+  .template-subject { font-size: 11px; color: var(--cream); font-weight: 400; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+  .template-subject span { color: var(--muted); font-weight: 300; }
+  .template-body { font-size: 11px; line-height: 1.85; color: var(--muted); white-space: pre-line; }
+  .template-body strong { color: var(--cream); font-weight: 400; }
+
+  /* Timeline */
+  .timeline { margin-bottom: 32px; position: relative; }
+  .timeline-item { display: grid; grid-template-columns: 56px 1fr; gap: 0; position: relative; }
+  .timeline-item + .timeline-item { margin-top: 0; }
+  .tl-time-col { display: flex; flex-direction: column; align-items: center; padding-top: 2px; }
+  .tl-time { font-family: var(--serif); font-size: 13px; color: var(--gold); line-height: 1; white-space: nowrap; }
+  .tl-connector { flex: 1; width: 1px; background: var(--border); margin-top: 6px; margin-bottom: 0; min-height: 20px; }
+  .timeline-item:last-child .tl-connector { display: none; }
+  .tl-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); margin-top: 5px; flex-shrink: 0; position: absolute; left: 47px; top: 4px; }
+  .tl-content { padding: 0 0 20px 20px; }
+  .tl-label { font-size: 12px; color: var(--cream); font-weight: 400; line-height: 1.4; margin-bottom: 2px; }
+  .tl-sub { font-size: 11px; color: var(--muted); line-height: 1.55; }
+
+  /* Checklist */
+  .checklist-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-bottom: 32px; background: var(--surface); border: 1px solid var(--border); }
+  .check-item { display: flex; align-items: flex-start; gap: 10px; padding: 13px 16px; border-bottom: 1px solid rgba(200,178,130,0.08); font-size: 11.5px; color: var(--muted); line-height: 1.45; }
+  .check-item:nth-child(odd) { border-right: 1px solid rgba(200,178,130,0.08); }
+  .check-item:nth-last-child(-n+2) { border-bottom: none; }
+  .check-box { width: 14px; height: 14px; border: 1px solid var(--border); flex-shrink: 0; margin-top: 1px; }
+
+  /* Conversation guides */
+  .convo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 28px; }
+  .convo-card { background: var(--surface); border: 1px solid var(--border); padding: 22px 20px; }
+  .convo-title { font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+  .convo-duration { font-size: 10px; color: var(--muted); margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+  .convo-block { margin-bottom: 14px; }
+  .convo-block:last-child { margin-bottom: 0; }
+  .convo-block-label { font-size: 8.5px; letter-spacing: 2px; text-transform: uppercase; color: rgba(200,178,130,0.5); margin-bottom: 6px; }
+  .convo-block p { font-size: 11.5px; line-height: 1.7; color: var(--muted); }
+  .convo-block ul { list-style: none; padding: 0; }
+  .convo-block ul li { font-size: 11.5px; color: var(--muted); line-height: 1.65; padding-left: 14px; position: relative; }
+  .convo-block ul li::before { content: '·'; position: absolute; left: 0; color: rgba(200,178,130,0.3); }
+  .convo-block strong { color: var(--cream); font-weight: 400; }
+
+  /* Red flags */
+  .redflag-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 28px; }
+  .redflag-card { background: var(--surface); border: 1px solid var(--border); border-left: 2px solid rgba(200,100,80,0.4); padding: 16px 18px; }
+  .redflag-signal { font-size: 11.5px; color: var(--cream); font-weight: 400; line-height: 1.4; margin-bottom: 6px; }
+  .redflag-signal::before { content: '⚑ '; font-size: 9px; color: rgba(200,100,80,0.6); }
+  .redflag-response { font-size: 11px; color: var(--muted); line-height: 1.6; }
+  .redflag-response strong { color: rgba(200,178,130,0.7); font-weight: 400; }
+
+  /* Closing callout */
+  .callout { background: var(--surface2); border: 1px solid var(--border); padding: 24px 28px; font-size: 13px; line-height: 1.85; color: var(--muted); margin-bottom: 40px; }
+  .callout .callout-headline { font-family: var(--serif); font-size: 17px; font-weight: 300; color: var(--cream); line-height: 1.5; margin-bottom: 10px; }
+  .callout p { font-size: 12px; color: var(--muted); line-height: 1.8; }
+
+  .doc-footer { padding-top: 18px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; font-size: 9.5px; color: var(--muted); letter-spacing: 0.5px; }
+  .doc-footer-brand { color: var(--gold); }
+
+  @media print {
+    html, body { background: #08070a !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    .doc { max-width: 100%; }
+    .sheet { padding: 48px 56px; }
+    .page-sep { display: none; }
+    .sheet--2, .sheet--3 { break-before: page; page-break-before: always; }
+    .doc-header, .stat-grid, .template-stack, .template-card,
+    .timeline, .checklist-grid, .convo-grid, .convo-card,
+    .redflag-grid, .redflag-card, .callout, .doc-footer, .running-header {
+      break-inside: avoid; page-break-inside: avoid;
+    }
+    .section-label { break-after: avoid; page-break-after: avoid; }
+    @page { size: A4; margin: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="doc">
+
+  <!-- PAGE 1 -->
+  <div class="sheet sheet--1">
+    <div class="doc-header">
+      <div>
+        <div class="doc-eyebrow">KIN · Kostenloses Onboarding-Kit</div>
+        <div class="doc-title">Der erste Tag, der bleibt.<br/>Das komplette 7-Tage-Onboarding-Playbook</div>
+        <div class="doc-subtitle">Drei Emails. Ein Tagesplan. Zwei Gespräche. Alles, was Sie brauchen, damit neue Mitarbeitende in der ersten Woche bleiben wollen.</div>
+      </div>
+      <svg class="logo-svg" viewBox="0 0 300 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 60 110 Q 150 10 240 110" stroke="#c8b282" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <g transform="translate(150,28)">
+          <line x1="0" y1="-9" x2="0" y2="9" stroke="#c8b282" stroke-width="1.2" stroke-linecap="round"/>
+          <line x1="-9" y1="0" x2="9" y2="0" stroke="#c8b282" stroke-width="1.2" stroke-linecap="round"/>
+          <line x1="-5.5" y1="-5.5" x2="5.5" y2="5.5" stroke="#c8b282" stroke-width="0.8" stroke-linecap="round"/>
+          <line x1="5.5" y1="-5.5" x2="-5.5" y2="5.5" stroke="#c8b282" stroke-width="0.8" stroke-linecap="round"/>
+        </g>
+        <text x="150" y="145" font-family="'Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif" font-size="44" font-weight="400" fill="#c8b282" text-anchor="middle" letter-spacing="18">KIN</text>
+      </svg>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-card highlight">
+        <div class="stat-num">3×</div>
+        <div class="stat-desc">Mitarbeitende, die ein strukturiertes Onboarding erhalten, bleiben im Durchschnitt dreimal länger. (SHRM, 2023)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">45%</div>
+        <div class="stat-desc">der Kündigungen im ersten Jahr passieren in den ersten 90 Tagen, meistens wegen eines schlechten ersten Eindrucks.</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">7 Tage</div>
+        <div class="stat-desc">Das Zeitfenster, in dem neue Mitarbeitende entscheiden, ob dieser Arbeitgeber langfristig der richtige für sie ist.</div>
+      </div>
+    </div>
+
+    <div class="section-label">Die drei Emails vor Tag 1</div>
+    <div class="template-stack">
+
+      <div class="template-card">
+        <div class="template-pill">Email 1: Tag der Vertragsunterzeichnung</div>
+        <div class="template-subject"><span>Betreff: </span>Herzlich willkommen, wir freuen uns auf Sie, [Vorname]</div>
+        <div class="template-body">Liebe/r [Vorname],
+
+wir haben gerade Ihren unterschriebenen Vertrag erhalten und möchten uns kurz melden, weil wir uns wirklich freuen, dass Sie dabei sind.
+
+Ihr Startdatum ist der <strong>[Datum]</strong>. Wir sorgen dafür, dass alles für Sie vorbereitet ist.
+
+In den nächsten Tagen erhalten Sie noch eine E-Mail mit allen praktischen Informationen für Ihre erste Woche. Falls Sie vorher Fragen haben, schreiben Sie mir gerne jederzeit.
+
+Bis bald,
+[Name], [Rolle]</div>
+      </div>
+
+      <div class="template-card">
+        <div class="template-pill">Email 2: Eine Woche vor Start</div>
+        <div class="template-subject"><span>Betreff: </span>Ihre erste Woche bei uns: Alles, was Sie wissen müssen</div>
+        <div class="template-body">Liebe/r [Vorname],
+
+Noch eine Woche, dann geht es los. Hier sind alle Informationen, damit Sie entspannt starten können:
+
+<strong>Ihr erster Tag:</strong>
+· Adresse &amp; Anfahrt: [Adresse + ggf. Parkplatz / ÖPNV-Hinweis]
+· Bitte kommen Sie um ca. [Uhrzeit], [Name] empfängt Sie persönlich
+· Kleidung: [Hinweis, falls relevant]
+· Bringen Sie mit: [Ausweis / Unterlagen, falls nötig]
+
+<strong>Was Sie erwartet:</strong>
+Am ersten Tag lernen Sie das Team kennen, richten Ihren Arbeitsplatz ein und bekommen einen realistischen Eindruck davon, wie wir arbeiten. Kein voller Terminkalender, genug Raum, um anzukommen.
+
+Falls noch Fragen offen sind: [Name] ist unter [Kontakt] für Sie erreichbar.
+
+Wir freuen uns auf Sie.
+[Name], [Rolle]</div>
+      </div>
+
+      <div class="template-card">
+        <div class="template-pill">Email 3: Einen Tag vor Start</div>
+        <div class="template-subject"><span>Betreff: </span>Bis morgen, [Vorname] 👋</div>
+        <div class="template-body">Liebe/r [Vorname],
+
+nur eine kurze Nachricht: Wir freuen uns auf morgen.
+
+[Name] erwartet Sie um [Uhrzeit] an [Ort / Eingangsbeschreibung].
+
+Falls morgen früh noch etwas sein sollte, erreichbar unter [Mobilnummer].
+
+Gute Nacht,
+[Name]</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="page-sep"><span>Seite 2</span></div>
+
+  <!-- PAGE 2 -->
+  <div class="sheet sheet--2">
+    <div class="running-header">
+      <span>Der erste Tag, der bleibt: Das komplette 7-Tage-Onboarding-Playbook</span>
+      <span>KIN</span>
+    </div>
+
+    <div class="section-label">Tag 1: Stunde für Stunde</div>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="tl-time-col">
+          <div class="tl-time">08:45</div>
+          <div class="tl-connector"></div>
+        </div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-label">Persönlicher Empfang</div>
+          <div class="tl-sub">Direkter Ansprechpartner wartet am Eingang, nicht die Rezeption. Erster Eindruck: jemand erwartet Sie.</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="tl-time-col">
+          <div class="tl-time">09:00</div>
+          <div class="tl-connector"></div>
+        </div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-label">Arbeitsplatz &amp; Orientierung</div>
+          <div class="tl-sub">Schreibtisch zeigen, Küche, Toiletten, Besprechungsräume. Kurzer Rundgang, kein Programm.</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="tl-time-col">
+          <div class="tl-time">09:30</div>
+          <div class="tl-connector"></div>
+        </div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-label">Setup-Session</div>
+          <div class="tl-sub">Laptop, E-Mail, Slack, alle Zugänge. Jemand sitzt dabei, keine Alleinlösung am ersten Tag.</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="tl-time-col">
+          <div class="tl-time">10:30</div>
+          <div class="tl-connector"></div>
+        </div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-label">Teamvorstellung</div>
+          <div class="tl-sub">Kurzes Standup oder kleine Runde: wer macht was, wer ist erster Ansprechpartner für welches Thema.</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="tl-time-col">
+          <div class="tl-time">11:00</div>
+          <div class="tl-connector"></div>
+        </div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-label">Erste echte Aufgabe</div>
+          <div class="tl-sub">Klein, lösbar, bedeutungsvoll. Nicht zu trivial, nicht überfordern. Das Ziel: einmal ankommen und etwas beitragen.</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="tl-time-col">
+          <div class="tl-time">12:00</div>
+          <div class="tl-connector"></div>
+        </div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-label">Gemeinsames Mittagessen</div>
+          <div class="tl-sub">Mit direktem Kollegen oder dem Team, kein Geschäftsessen, kein Programm. Einfach zusammen Pause machen.</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="tl-time-col">
+          <div class="tl-time">14:00</div>
+          <div class="tl-connector"></div>
+        </div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-label">Erstes Check-in-Gespräch</div>
+          <div class="tl-sub">„Wie läuft's bisher? Was ist unklar? Was brauchen Sie?" 10 Minuten, informell, aufrichtig.</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="tl-time-col">
+          <div class="tl-time">16:30</div>
+        </div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-label">Tagesabschluss</div>
+          <div class="tl-sub">Was war gut? Was kommt morgen? Kurze Vorschau auf die Woche, damit Tag 2 nicht wieder Tag 1 anfühlt.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="section-label">Die 14-Punkte-Onboarding-Checkliste</div>
+    <div class="checklist-grid">
+      <div class="check-item"><div class="check-box"></div>Laptop &amp; Arbeitsplatz eingerichtet</div>
+      <div class="check-item"><div class="check-box"></div>Alle Zugänge aktiv (E-Mail, Slack, Tools)</div>
+      <div class="check-item"><div class="check-box"></div>Direkter Ansprechpartner für Tag 1 benannt</div>
+      <div class="check-item"><div class="check-box"></div>Team über Startdatum und Rolle informiert</div>
+      <div class="check-item"><div class="check-box"></div>Erste Woche kalendarisch verplant</div>
+      <div class="check-item"><div class="check-box"></div>Unterlagen vorbereitet (Handbuch, Organigramm)</div>
+      <div class="check-item"><div class="check-box"></div>Vorstellungsrunde geplant</div>
+      <div class="check-item"><div class="check-box"></div>Erste sinnvolle Aufgabe definiert</div>
+      <div class="check-item"><div class="check-box"></div>Mittagessen für Tag 1 organisiert</div>
+      <div class="check-item"><div class="check-box"></div>Alle drei Pre-Arrival-Emails versendet</div>
+      <div class="check-item"><div class="check-box"></div>Buddy / Mentor benannt</div>
+      <div class="check-item"><div class="check-box"></div>30-60-90-Tage-Ziele besprochen</div>
+      <div class="check-item"><div class="check-box"></div>Tag-3-Gespräch eingeplant</div>
+      <div class="check-item"><div class="check-box"></div>Tag-7-Gespräch eingeplant</div>
+    </div>
+  </div>
+
+  <div class="page-sep"><span>Seite 3</span></div>
+
+  <!-- PAGE 3 -->
+  <div class="sheet sheet--3">
+    <div class="running-header">
+      <span>Der erste Tag, der bleibt: Das komplette 7-Tage-Onboarding-Playbook</span>
+      <span>KIN</span>
+    </div>
+
+    <div class="section-label">Die zwei Gespräche, die den Unterschied machen</div>
+    <div class="convo-grid">
+
+      <div class="convo-card">
+        <div class="convo-title">Tag-3-Gespräch</div>
+        <div class="convo-duration">15 Minuten · informell · unter vier Augen</div>
+
+        <div class="convo-block">
+          <div class="convo-block-label">Einstieg</div>
+          <p>„Wie war die erste Woche bisher für Sie? Was hat Sie überrascht, positiv wie negativ?"</p>
+        </div>
+
+        <div class="convo-block">
+          <div class="convo-block-label">Kernfragen</div>
+          <ul>
+            <li>Was ist noch unklar oder fehlt Ihnen gerade?</li>
+            <li>Gibt es jemanden, mit dem Sie noch nicht gesprochen haben, aber sollten?</li>
+            <li>Was haben Sie bisher anders erwartet als es ist?</li>
+          </ul>
+        </div>
+
+        <div class="convo-block">
+          <div class="convo-block-label">Worauf achten</div>
+          <p>Zögern bei „alles gut". Konkrete Verwirrung über Prozesse. Keine Antwort auf die Frage nach Kollegen. Das sind Signale. Hören Sie hin.</p>
+        </div>
+
+        <div class="convo-block">
+          <div class="convo-block-label">Abschluss</div>
+          <p>„Ich bin Ihr Ansprechpartner, auch für Kleinigkeiten. Wir sprechen nächste Woche nochmal kurz."</p>
+        </div>
+      </div>
+
+      <div class="convo-card">
+        <div class="convo-title">Tag-7-Gespräch</div>
+        <div class="convo-duration">30 Minuten · strukturiert · mit Notizen</div>
+
+        <div class="convo-block">
+          <div class="convo-block-label">Einstieg</div>
+          <p>„Eine Woche geschafft. Was nehmen Sie mit, und was wünschen Sie sich für die nächsten Wochen?"</p>
+        </div>
+
+        <div class="convo-block">
+          <div class="convo-block-label">Kernfragen</div>
+          <ul>
+            <li>Haben Sie ein klares Bild Ihrer Rolle und Ziele für die ersten 90 Tage?</li>
+            <li>Wo fehlt Ihnen noch Kontext oder Unterstützung?</li>
+            <li>Was hat gut funktioniert, was würden Sie anders machen?</li>
+            <li>Wie fühlt sich das Team für Sie an?</li>
+          </ul>
+        </div>
+
+        <div class="convo-block">
+          <div class="convo-block-label">Worauf achten</div>
+          <p>Unklarheit über Erwartungen nach Woche 1 ist ein <strong>Warnsignal</strong>. Fehlende Antwort auf die Teamfrage auch. Notieren Sie beides und handeln Sie in den nächsten 48 Stunden.</p>
+        </div>
+
+        <div class="convo-block">
+          <div class="convo-block-label">Abschluss</div>
+          <p>Vereinbaren Sie den nächsten Check-in (Tag 30). Fragen Sie explizit: „Gibt es etwas, das Sie mir noch nicht gesagt haben, aber sagen möchten?"</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="section-label">Warnsignale: wenn jemand still kündigt</div>
+    <div class="redflag-grid">
+
+      <div class="redflag-card">
+        <div class="redflag-signal">Hört auf, Fragen zu stellen</div>
+        <div class="redflag-response"><strong>Reaktion:</strong> Aktiv nachfragen: „Was beschäftigt Sie gerade?" Nicht warten. Stille ist kein Zeichen von Sicherheit.</div>
+      </div>
+
+      <div class="redflag-card">
+        <div class="redflag-signal">Lehnt gemeinsame Mittagessen ab</div>
+        <div class="redflag-response"><strong>Reaktion:</strong> 1:1 einladen statt Gruppeneinladung. Zugehörigkeit entsteht durch Zweier-Gespräche, nicht durch Runden.</div>
+      </div>
+
+      <div class="redflag-card">
+        <div class="redflag-signal">Gibt einsilbige Check-in-Antworten</div>
+        <div class="redflag-response"><strong>Reaktion:</strong> Konkrete Fragen stellen: „Was war gestern das Frustrierendste?" Offene Fragen werden geschlossen beantwortet, wenn Vertrauen fehlt.</div>
+      </div>
+
+      <div class="redflag-card">
+        <div class="redflag-signal">Liefert deutlich unter Niveau</div>
+        <div class="redflag-response"><strong>Reaktion:</strong> Aufgaben gemeinsam priorisieren. Oft fehlt Kontext, nicht Kompetenz. Klären Sie, was erwartet wird, bevor Sie urteilen.</div>
+      </div>
+
+      <div class="redflag-card">
+        <div class="redflag-signal">Spricht nie über Zukunftspläne</div>
+        <div class="redflag-response"><strong>Reaktion:</strong> Explizit ansprechen: „Wo sehen Sie sich in 12 Monaten hier?" Keine Antwort bedeutet: sie haben sich noch keine Zukunft hier vorgestellt.</div>
+      </div>
+
+      <div class="redflag-card">
+        <div class="redflag-signal">Zieht sich nach 17 Uhr sofort zurück</div>
+        <div class="redflag-response"><strong>Reaktion:</strong> Kein Problem an sich, aber kombiniert mit anderen Signalen: prüfen, ob die Person sich als Teil des Teams fühlt oder nur als Dienstleister.</div>
+      </div>
+
+    </div>
+
+    <div class="callout">
+      <div class="callout-headline">Onboarding ist keine HR-Aufgabe. Es ist eine Führungsaufgabe.</div>
+      <p>Die Unternehmen mit der niedrigsten Frühfluktuation machen kein besseres Recruiting. Sie machen einen besseren ersten Tag. Nicht mit mehr Programm, sondern mit mehr Aufmerksamkeit: drei durchdachte Emails, ein klarer Tagesplan, zwei ehrliche Gespräche. Das ist alles, was es braucht, damit jemand nach der ersten Woche sagt: Hier bin ich richtig.</p>
+    </div>
+
+    <div class="doc-footer">
+      <span class="doc-footer-brand">KIN</span>
+      <span>hello@kinboxes.de · kinboxes.de</span>
+      <span>© 2026 KIN</span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
