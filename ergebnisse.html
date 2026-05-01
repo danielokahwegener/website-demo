@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ergebnisse | Athlete Comeback Coaching</title>
+  <meta name="description" content="Echte Ergebnisse ehemaliger Mannschaftssportler. Keine idealen Ausgangsbedingungen. Die ganzen Geschichten.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="components.css">
+  <style>
+    /* ---- Hero ---- */
+    .hero {
+      background: var(--bg-subtle);
+      border-bottom: 1px solid var(--bg-border);
+      padding: var(--spacing-xl) var(--spacing-sm);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(201,169,110,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero .container { position: relative; }
+    .hero h1 { margin-bottom: 1rem; max-width: 640px; margin-left: auto; margin-right: auto; }
+    .hero h1 em { color: var(--gold); font-style: italic; }
+    .hero .sub {
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+      max-width: 500px;
+      margin: 0 auto 2rem;
+      line-height: 1.7;
+    }
+
+    /* ---- Angebot-Strip ---- */
+    .angebot-strip {
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--bg-border);
+      padding: var(--spacing-lg) var(--spacing-sm);
+    }
+    .angebot-strip .container {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: var(--spacing-lg);
+      align-items: center;
+      max-width: 860px;
+    }
+    .angebot-text h3 { font-size: 1rem; margin-bottom: 0.4rem; }
+    .angebot-text p { color: var(--text-secondary); font-size: 0.88rem; margin: 0; line-height: 1.6; }
+    .angebot-features-mini {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.6rem;
+    }
+    .feature-tag {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--gold);
+      background: var(--gold-subtle);
+      border: 1px solid var(--gold-dark);
+      padding: 0.2rem 0.6rem;
+      border-radius: 100px;
+      white-space: nowrap;
+    }
+    @media (max-width: 640px) {
+      .angebot-strip .container { grid-template-columns: 1fr; }
+    }
+
+    /* ---- Archetyp-Navigation ---- */
+    .typ-nav {
+      background: var(--bg-page);
+      border-bottom: 1px solid var(--bg-border);
+      padding: 0.75rem var(--spacing-sm);
+      position: sticky;
+      top: 64px;
+      z-index: 50;
+    }
+    .typ-nav-inner {
+      display: flex;
+      gap: 0.5rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding-bottom: 2px;
+    }
+    .typ-nav-inner::-webkit-scrollbar { display: none; }
+    .typ-link {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      border: 1px solid var(--bg-border);
+      background: var(--bg-surface);
+      padding: 0.4rem 0.85rem;
+      border-radius: 100px;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: all 0.18s;
+      flex-shrink: 0;
+    }
+    .typ-link:hover {
+      border-color: var(--gold-dark);
+      color: var(--gold);
+      background: var(--gold-subtle);
+      text-decoration: none;
+    }
+
+    /* ---- Archetyp-Sektion ---- */
+    .archetyp-section {
+      padding: var(--spacing-xl) var(--spacing-sm);
+      border-bottom: 1px solid var(--bg-border);
+    }
+    .archetyp-section:nth-child(odd) { background: var(--bg-page); }
+    .archetyp-section:nth-child(even) { background: var(--bg-subtle); }
+
+    .archetyp-header { margin-bottom: var(--spacing-lg); }
+    .archetyp-header .typ-nr {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.3rem;
+    }
+    .archetyp-header h2 { margin-bottom: 0.4rem; }
+    .archetyp-header .tagline {
+      font-family: var(--font-heading);
+      font-style: italic;
+      font-size: 1rem;
+      color: var(--text-secondary);
+    }
+
+    /* ---- Case Study Cards ---- */
+    .case-studies {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--spacing-md);
+    }
+    .case-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--bg-border);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .case-card-top {
+      padding: var(--spacing-md);
+      border-bottom: 1px solid var(--bg-border);
+      position: relative;
+    }
+    .case-card-top::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold-dark), var(--gold), var(--gold-dark));
+    }
+    .case-profile {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+    .case-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--bg-elevated);
+      border: 1px solid var(--bg-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .case-name { font-size: 0.95rem; font-weight: 700; color: var(--text-primary); display: block; }
+    .case-details { font-size: 0.75rem; color: var(--text-muted); }
+    .case-result {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--gold-subtle);
+      border: 1px solid var(--gold-dark);
+      border-radius: 100px;
+      padding: 0.25rem 0.75rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+    .case-card-body {
+      padding: var(--spacing-md);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+    .case-block-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.2rem;
+    }
+    .case-block-text { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.55; margin: 0; }
+    .case-quote {
+      background: var(--bg-elevated);
+      border-left: 3px solid var(--gold-dark);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 0.75rem 1rem;
+      margin-top: auto;
+    }
+    .case-quote p {
+      font-family: var(--font-heading);
+      font-style: italic;
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    /* ---- Foto-Placeholder ---- */
+    .transformation-strip {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      background: var(--bg-border);
+      margin-bottom: var(--spacing-sm);
+    }
+    .trans-img {
+      aspect-ratio: 1/1;
+      background: var(--bg-elevated);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.3rem;
+      font-size: 1.5rem;
+      opacity: 0.4;
+    }
+    .trans-img span {
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .transformation-strip img { width: 100%; aspect-ratio: 3/4; object-fit: cover; display: block; }
+
+    /* ---- FAQ ---- */
+    .faq-section {
+      padding: var(--spacing-xl) var(--spacing-sm);
+      background: var(--bg-page);
+    }
+    .faq-section .intro { text-align: center; margin-bottom: var(--spacing-lg); }
+    .faq-section .intro h2 { margin-bottom: 0.5rem; }
+    .faq-section .intro p { color: var(--text-secondary); font-size: 0.9rem; }
+    .faq-list {
+      max-width: 680px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: var(--bg-border);
+      border: 1px solid var(--bg-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .faq-item { background: var(--bg-surface); }
+    .faq-q {
+      width: 100%;
+      text-align: left;
+      background: none;
+      border: none;
+      padding: var(--spacing-md);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+    .faq-q:hover { color: var(--gold); }
+    .faq-icon { color: var(--gold); font-size: 1.1rem; flex-shrink: 0; transition: transform 0.2s; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-a {
+      display: none;
+      padding: 0 var(--spacing-md) var(--spacing-md);
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+    .faq-item.open .faq-a { display: block; }
+
+    /* ---- Finaler CTA ---- */
+    .final-cta {
+      padding: var(--spacing-xl) var(--spacing-sm);
+      background: var(--bg-subtle);
+      text-align: center;
+      border-top: 1px solid var(--bg-border);
+      position: relative;
+      overflow: hidden;
+    }
+    .final-cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 60% at 50% 100%, rgba(201,169,110,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .final-cta .container { position: relative; }
+    .final-cta h2 { margin-bottom: 0.75rem; }
+    .final-cta .lead {
+      color: var(--text-secondary);
+      max-width: 480px;
+      margin: 0 auto var(--spacing-lg);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    .cta-meta { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.75rem; }
+
+    @media (max-width: 768px) {
+      .case-studies { grid-template-columns: 1fr; }
+      .typ-nav { top: 56px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <span class="site-logo">Athlete <span>Comeback</span></span>
+      <a href="angebot.html" class="btn btn--ghost" style="padding:0.5rem 1.1rem;font-size:0.82rem;">
+        100 Tage kostenlos testen &rarr;
+      </a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="section-label" style="text-align:center; margin-bottom:0.75rem;">Echte Ergebnisse</div>
+      <h1>Was wirklich passiert, wenn ehemalige Mannschaftssportler <em>das richtige System finden.</em></h1>
+      <p class="sub">
+        Keine Performance-Athleten mit idealen Ausgangsbedingungen. Ehemalige Teamsportler mit 9-to-5-Job, alter Verletzungshistorie und dem Drei-Wochen-Kreislauf hinter sich.
+      </p>
+      <a href="termin.html" class="btn btn--primary btn--lg">
+        100 Tage kostenlos testen &rarr;
+      </a>
+    </div>
+  </section>
+
+  <!-- Angebot-Zusammenfassung -->
+  <section class="angebot-strip">
+    <div class="container">
+      <div class="angebot-text">
+        <h3>Was jeder von ihnen bekommen hat</h3>
+        <p>Denselben Ansatz. Auf ihre Geschichte zugeschnitten. 100 Tage kostenlos, bevor eine Entscheidung fällig wird.</p>
+        <div class="angebot-features-mini">
+          <span class="feature-tag">Vollständig personalisiertes 1-zu-1-Coaching</span>
+          <span class="feature-tag">Wöchentlicher 1-zu-1-Call</span>
+          <span class="feature-tag">Die Comeback-Community</span>
+          <span class="feature-tag">Verletzungs-Bibliothek</span>
+          <span class="feature-tag">Reset-Killer-Plan</span>
+          <span class="feature-tag">Das Athleten-Protokoll</span>
+        </div>
+      </div>
+      <a href="angebot.html" class="btn btn--ghost" style="flex-shrink:0;">
+        Angebot ansehen &rarr;
+      </a>
+    </div>
+  </section>
+
+  <!-- Archetyp-Navigation -->
+  <nav class="typ-nav" aria-label="Zu einem Profil springen">
+    <div class="typ-nav-inner">
+      <a href="#vollgasathlet"       class="typ-link">Der Vollgasathlet</a>
+      <a href="#teamkind"            class="typ-link">Das Teamkind</a>
+      <a href="#rost-veteran"        class="typ-link">Der Rost-Veteran</a>
+      <a href="#metabolismus-schock" class="typ-link">Der Metabolismus-Schock</a>
+      <a href="#leistungsblockierte" class="typ-link">Der Leistungsblockierte</a>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ========== PROFIL 1: VOLLGASATHLET ========== -->
+    <section class="archetyp-section" id="vollgasathlet">
+      <div class="container container--wide">
+        <div class="archetyp-header">
+          <div class="typ-nr">Profil 01</div>
+          <h2>Der Vollgasathlet</h2>
+          <p class="tagline">Er trainiert wie vor dem Endspiel. Dann kommt nichts mehr.</p>
+        </div>
+        <div class="case-studies">
+
+          <div class="case-card">
+            <div class="transformation-strip" aria-hidden="true">
+              <img src="2before-26y50lbs20mon.jpg" alt="Luca M. Vorher">
+              <img src="2after-26y50lbs20mon.jpg" alt="Luca M. Nachher">
+            </div>
+            <div class="case-card-top">
+              <div class="case-profile">
+                <div class="case-avatar" aria-hidden="true">&#128104;</div>
+                <div>
+                  <span class="case-name">Luca M.</span>
+                  <span class="case-details">26 Jahre &middot; ehem. Fußballer &middot; Personal Trainer</span>
+                </div>
+              </div>
+              <div class="case-result">-23 kg &middot; deutlich mehr Muskelmasse &middot; 20 Monate</div>
+            </div>
+            <div class="case-card-body">
+              <div>
+                <p class="case-block-label">Das Hindernis</p>
+                <p class="case-block-text">Als aktiver Spieler immer auf 100 Prozent. Nach dem letzten Spiel: dasselbe Muster. Drei Wochen Vollgas, dann nichts, dann wieder von vorne. Das athletische Fundament war da. Der richtige Schalter fehlte.</p>
+              </div>
+              <div>
+                <p class="case-block-label">Was sich verändert hat</p>
+                <p class="case-block-text">Strukturierter Plan mit progressivem Intensitätsprofil. Kein All-or-nothing mehr. Das Fundament aktiviert. Zum ersten Mal Muskelmasse aufgebaut, statt nur Gewicht zu verlieren.</p>
+              </div>
+              <div class="case-quote">
+                <p>„Das erste Mal habe ich Muskeln aufgebaut, ohne mich gleichzeitig kaputtzumachen. Ich hatte nicht verstanden, dass das möglich ist."</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="case-card">
+            <div class="transformation-strip" aria-hidden="true">
+              <img src="5before-31y27lbs6mon.jpg" alt="Tobias R. Vorher">
+              <img src="5after-31y27lbs6mon.jpg" alt="Tobias R. Nachher">
+            </div>
+            <div class="case-card-top">
+              <div class="case-profile">
+                <div class="case-avatar" aria-hidden="true">&#128104;</div>
+                <div>
+                  <span class="case-name">Tobias R.</span>
+                  <span class="case-details">31 Jahre &middot; ehem. Rugbyspieler &middot; Vertriebsleiter</span>
+                </div>
+              </div>
+              <div class="case-result">-12 kg &middot; 6 Monate</div>
+            </div>
+            <div class="case-card-body">
+              <div>
+                <p class="case-block-label">Das Hindernis</p>
+                <p class="case-block-text">Jede Einheit wie ein Wettkampf. Schulter nach Woche 3 überlastet, dann sechs Wochen nichts, dann wieder von vorne. Seit dem Karriereende immer dasselbe Muster.</p>
+              </div>
+              <div>
+                <p class="case-block-label">Was sich verändert hat</p>
+                <p class="case-block-text">Intensität systematisch zurückgenommen. Progressiver Aufbau mit eingebautem Erholungsprotokoll. Zum ersten Mal 6 Monate am Stück, kein einziger Reset.</p>
+              </div>
+              <div class="case-quote">
+                <p>„Sechs Monate klingt nicht nach viel. Für mich war es das erste Mal überhaupt."</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div style="text-align:center; margin-top:var(--spacing-lg); padding-top:var(--spacing-lg); border-top:1px solid var(--bg-border);">
+          <a href="angebot.html" class="btn btn--primary">Mehr herausfinden &rarr;</a>
+          <p style="font-size:0.78rem; color:var(--text-muted); margin-top:0.5rem;">Erfahre, wie das 100-Tage-Coaching für dein Profil aussieht.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== PROFIL 2: TEAMKIND ========== -->
+    <section class="archetyp-section" id="teamkind">
+      <div class="container container--wide">
+        <div class="archetyp-header">
+          <div class="typ-nr">Profil 02</div>
+          <h2>Das Teamkind</h2>
+          <p class="tagline">Er hatte nie ein Disziplinproblem. Er hatte immer jemanden, der es für ihn organisiert hat.</p>
+        </div>
+        <div class="case-studies">
+
+          <div class="case-card">
+            <div class="transformation-strip" aria-hidden="true">
+              <img src="1before-23y58lbs33mon.jpg" alt="Niklas F. Vorher">
+              <img src="1after-23y58lbs33mon.jpg" alt="Niklas F. Nachher">
+            </div>
+            <div class="case-card-top">
+              <div class="case-profile">
+                <div class="case-avatar" aria-hidden="true">&#128104;</div>
+                <div>
+                  <span class="case-name">Niklas F.</span>
+                  <span class="case-details">23 Jahre &middot; ehem. Handballer &middot; Logistikkoordinator</span>
+                </div>
+              </div>
+              <div class="case-result">-26 kg &middot; 33 Monate</div>
+            </div>
+            <div class="case-card-body">
+              <div>
+                <p class="case-block-label">Das Hindernis</p>
+                <p class="case-block-text">10 Jahre Handball, immer mit Team und Trainer. Danach allein. Keine drei Wochen ohne Abbruch. Apps, Videos, Pläne. Nichts hat gehalten. Er hat es als Willensproblem gesehen.</p>
+              </div>
+              <div>
+                <p class="case-block-label">Was sich verändert hat</p>
+                <p class="case-block-text">Fester Coach, täglich erreichbar. Wöchentlicher 1-zu-1-Call. Das System, das früher das Team übernommen hat, war wieder vorhanden. Der Plan war nicht optional.</p>
+              </div>
+              <div class="case-quote">
+                <p>„Im Handball hatte ich nie ein Disziplinproblem. Solo hatte ich keinen. Das war der ganze Unterschied."</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="case-card">
+            <div class="transformation-strip" aria-hidden="true">
+              <img src="10before-38y49lbs12mon.jpg" alt="Stefan W. Vorher">
+              <img src="10after-38y49lbs12mon.jpg" alt="Stefan W. Nachher">
+            </div>
+            <div class="case-card-top">
+              <div class="case-profile">
+                <div class="case-avatar" aria-hidden="true">&#128104;</div>
+                <div>
+                  <span class="case-name">Stefan W.</span>
+                  <span class="case-details">38 Jahre &middot; ehem. Fußballer &middot; Projektmanager</span>
+                </div>
+              </div>
+              <div class="case-result">-22 kg &middot; 12 Monate</div>
+            </div>
+            <div class="case-card-body">
+              <div>
+                <p class="case-block-label">Das Hindernis</p>
+                <p class="case-block-text">Beruflich strukturiert und zuverlässig. Beim Training: keine externe Erwartung, keine Konsequenz, kein Erscheinen. Er wusste was zu tun war. Er tat es schlicht nicht.</p>
+              </div>
+              <div>
+                <p class="case-block-label">Was sich verändert hat</p>
+                <p class="case-block-text">Coach, der täglich da ist und weiß ob er erschienen ist. Trainingszeiten wie Kundentermine. Die externe Erwartung zurück. Zwölf Monate konstant.</p>
+              </div>
+              <div class="case-quote">
+                <p>„Ich brauche keine Motivation. Ich brauche jemanden, der weiß ob ich da war. Das war der einzige Unterschied."</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div style="text-align:center; margin-top:var(--spacing-lg); padding-top:var(--spacing-lg); border-top:1px solid var(--bg-border);">
+          <a href="angebot.html" class="btn btn--primary">Mehr herausfinden &rarr;</a>
+          <p style="font-size:0.78rem; color:var(--text-muted); margin-top:0.5rem;">Erfahre, wie das 100-Tage-Coaching für dein Profil aussieht.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== PROFIL 3: ROST-VETERAN ========== -->
+    <section class="archetyp-section" id="rost-veteran">
+      <div class="container container--wide">
+        <div class="archetyp-header">
+          <div class="typ-nr">Profil 03</div>
+          <h2>Der Rost-Veteran</h2>
+          <p class="tagline">Sein Körper erinnert sich an jeden Zweikampf. Er trainiert jetzt damit, nicht dagegen.</p>
+        </div>
+        <div class="case-studies">
+
+          <div class="case-card">
+            <div class="transformation-strip" aria-hidden="true">
+              <img src="8before-37y60lbs8mon.jpg" alt="Kai N. Vorher">
+              <img src="8after-37y60lbs8mon.jpg" alt="Kai N. Nachher">
+            </div>
+            <div class="case-card-top">
+              <div class="case-profile">
+                <div class="case-avatar" aria-hidden="true">&#128104;</div>
+                <div>
+                  <span class="case-name">Kai N.</span>
+                  <span class="case-details">37 Jahre &middot; ehem. Rugbyspieler &middot; Sicherheitsmanager</span>
+                </div>
+              </div>
+              <div class="case-result">-27 kg &middot; 8 Monate</div>
+            </div>
+            <div class="case-card-body">
+              <div>
+                <p class="case-block-label">Das Hindernis</p>
+                <p class="case-block-text">Schultern und Knie aus jahrelangem Kontaktsport. Die Muskulatur war noch da. Die Belastbarkeit nicht mehr. Er wusste nicht, wie man mit dem trainiert, was noch geht.</p>
+              </div>
+              <div>
+                <p class="case-block-label">Was sich verändert hat</p>
+                <p class="case-block-text">Plan vollständig um seine Einschränkungen herum gebaut, nicht trotz ihnen. Das athletische Fundament aktiviert, ohne neue Verletzungen zu riskieren. Acht Monate ohne Rückschlag.</p>
+              </div>
+              <div class="case-quote">
+                <p>„Ich dachte, ich muss warten bis mein Körper bereit ist. Mein Coach hat mir gezeigt, was heute schon geht."</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="case-card">
+            <div class="transformation-strip" aria-hidden="true">
+              <img src="9before-37y94lbs18mon.jpg" alt="Daniel B. Vorher">
+              <img src="9after-37y94lbs18mon.jpg" alt="Daniel B. Nachher">
+            </div>
+            <div class="case-card-top">
+              <div class="case-profile">
+                <div class="case-avatar" aria-hidden="true">&#128104;</div>
+                <div>
+                  <span class="case-name">Daniel B.</span>
+                  <span class="case-details">37 Jahre &middot; ehem. Fußballer &middot; Unternehmer</span>
+                </div>
+              </div>
+              <div class="case-result">-43 kg &middot; 18 Monate</div>
+            </div>
+            <div class="case-card-body">
+              <div>
+                <p class="case-block-label">Das Hindernis</p>
+                <p class="case-block-text">Jahrelang um Schmerzen herumtrainiert. Kein System, das seine Geschichte kannte. Jeder Versuch scheiterte an denselben Stellen. Er glaubte, sein Körper lasse es einfach nicht mehr zu.</p>
+              </div>
+              <div>
+                <p class="case-block-label">Was sich verändert hat</p>
+                <p class="case-block-text">Vollständig angepasster Plan auf seinen Körper und seine Verletzungshistorie. Keine Standardübungen, keine Abkürzungen. Langsam, systematisch, ohne neue Rückschläge.</p>
+              </div>
+              <div class="case-quote">
+                <p>„18 Monate. Langsam. Aber diesmal bis ans Ende."</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div style="text-align:center; margin-top:var(--spacing-lg); padding-top:var(--spacing-lg); border-top:1px solid var(--bg-border);">
+          <a href="angebot.html" class="btn btn--primary">Mehr herausfinden &rarr;</a>
+          <p style="font-size:0.78rem; color:var(--text-muted); margin-top:0.5rem;">Erfahre, wie das 100-Tage-Coaching für dein Profil aussieht.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== PROFIL 4: METABOLISMUS-SCHOCK ========== -->
+    <section class="archetyp-section" id="metabolismus-schock">
+      <div class="container container--wide">
+        <div class="archetyp-header">
+          <div class="typ-nr">Profil 04</div>
+          <h2>Der Metabolismus-Schock</h2>
+          <p class="tagline">Er isst noch wie ein Athlet. Sein Alltag hat sich fundamental verändert.</p>
+        </div>
+        <div class="case-studies">
+
+          <div class="case-card">
+            <div class="transformation-strip" aria-hidden="true">
+              <img src="3before-27y138lbs24mon.jpg" alt="David L. Vorher">
+              <img src="3after-27y138lbs24mon.jpg" alt="David L. Nachher">
+            </div>
+            <div class="case-card-top">
+              <div class="case-profile">
+                <div class="case-avatar" aria-hidden="true">&#128104;</div>
+                <div>
+                  <span class="case-name">David L.</span>
+                  <span class="case-details">27 Jahre &middot; ehem. Rugbyspieler &middot; Softwareentwickler</span>
+                </div>
+              </div>
+              <div class="case-result">-63 kg &middot; 24 Monate</div>
+            </div>
+            <div class="case-card-body">
+              <div>
+                <p class="case-block-label">Das Hindernis</p>
+                <p class="case-block-text">Als aktiver Spieler aß er alles was da war. Der Kalorienverbrauch war enorm. Nach dem Karriereende: gegessen wie damals, bewegt wie ein Büroangestellter. Die Gleichung hatte sich komplett verschoben.</p>
+              </div>
+              <div>
+                <p class="case-block-label">Was sich verändert hat</p>
+                <p class="case-block-text">Ernährung neu kalibriert auf den Alltag, den er heute hat. Training angepasst. Kein Hungern, keine Verbote. Systematischer Aufbau über 24 Monate.</p>
+              </div>
+              <div class="case-quote">
+                <p>„Ich habe wie ein Profisportler gegessen, war aber keiner mehr. Niemand hat mir das je klar gesagt."</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="case-card">
+            <div class="transformation-strip" aria-hidden="true">
+              <img src="7before-34y95lbs24mon.jpg" alt="Marco D. Vorher">
+              <img src="7after-34y95lbs24mon.jpg" alt="Marco D. Nachher">
+            </div>
+            <div class="case-card-top">
+              <div class="case-profile">
+                <div class="case-avatar" aria-hidden="true">&#128104;</div>
+                <div>
+                  <span class="case-name">Marco D.</span>
+                  <span class="case-details">34 Jahre &middot; ehem. Rugbyspieler &middot; Sicherheitsdienstleiter</span>
+                </div>
+              </div>
+              <div class="case-result">-43 kg &middot; 24 Monate</div>
+            </div>
+            <div class="case-card-body">
+              <div>
+                <p class="case-block-label">Das Hindernis</p>
+                <p class="case-block-text">Jahrelang zugenommen ohne zu verstehen warum. Aß vernünftig, bewegte sich wenig. Der Verbrauch aus der aktiven Rugbyzeit fehlte, die Gewohnheiten waren geblieben.</p>
+              </div>
+              <div>
+                <p class="case-block-label">Was sich verändert hat</p>
+                <p class="case-block-text">Ernährung und Training auf seinen heutigen Alltag ausgerichtet. Kein Extremtraining, kein Hungern. Systematische Kalibrierung, 24 Monate.</p>
+              </div>
+              <div class="case-quote">
+                <p>„Ich war in einem Körper gefangen, den ich nicht mehr erkannt habe. 24 Monate später kenne ich ihn wieder."</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div style="text-align:center; margin-top:var(--spacing-lg); padding-top:var(--spacing-lg); border-top:1px solid var(--bg-border);">
+          <a href="angebot.html" class="btn btn--primary">Mehr herausfinden &rarr;</a>
+          <p style="font-size:0.78rem; color:var(--text-muted); margin-top:0.5rem;">Erfahre, wie das 100-Tage-Coaching für dein Profil aussieht.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== PROFIL 5: LEISTUNGSBLOCKIERTE ========== -->
+    <section class="archetyp-section" id="leistungsblockierte">
+      <div class="container container--wide">
+        <div class="archetyp-header">
+          <div class="typ-nr">Profil 05</div>
+          <h2>Der Leistungsblockierte</h2>
+          <p class="tagline">Er trainiert. Er erscheint. Er sieht nichts.</p>
+        </div>
+        <div class="case-studies">
+
+          <div class="case-card">
+            <div class="transformation-strip" aria-hidden="true">
+              <img src="4before-28y14lbs5mon.jpg" alt="Felix M. Vorher">
+              <img src="4after-28y14lbs5mon.jpg" alt="Felix M. Nachher">
+            </div>
+            <div class="case-card-top">
+              <div class="case-profile">
+                <div class="case-avatar" aria-hidden="true">&#128104;</div>
+                <div>
+                  <span class="case-name">Felix M.</span>
+                  <span class="case-details">28 Jahre &middot; ehem. Fußballer &middot; Physiotherapeut</span>
+                </div>
+              </div>
+              <div class="case-result">-6 kg &middot; deutliche Körperkomposition &middot; 5 Monate</div>
+            </div>
+            <div class="case-card-body">
+              <div>
+                <p class="case-block-label">Das Hindernis</p>
+                <p class="case-block-text">Trainierte regelmäßig, sah kaum Veränderung. Dachte, er mache grundlegend etwas falsch. Er machte es richtig, aber ohne progressiven Reiz. Der Körper hatte keinen Grund zu antworten.</p>
+              </div>
+              <div>
+                <p class="case-block-label">Was sich verändert hat</p>
+                <p class="case-block-text">Progressiver Belastungsplan. Jede Woche messbar mehr. Der Körper hatte endlich einen Reiz, auf den er reagieren musste. Fünf Monate. Ergebnis sichtbar.</p>
+              </div>
+              <div class="case-quote">
+                <p>„Ich war die ganze Zeit im Gym. Ich stand nur auf einem Plateau. Den Unterschied hat man dann gesehen."</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="case-card">
+            <div class="transformation-strip" aria-hidden="true">
+              <img src="6before-34y35lbs18mon.jpg" alt="Patrick H. Vorher">
+              <img src="6after-34y35lbs18mon.jpg" alt="Patrick H. Nachher">
+            </div>
+            <div class="case-card-top">
+              <div class="case-profile">
+                <div class="case-avatar" aria-hidden="true">&#128104;</div>
+                <div>
+                  <span class="case-name">Patrick H.</span>
+                  <span class="case-details">34 Jahre &middot; ehem. Basketballer &middot; Steuerberater</span>
+                </div>
+              </div>
+              <div class="case-result">-16 kg &middot; 18 Monate</div>
+            </div>
+            <div class="case-card-body">
+              <div>
+                <p class="case-block-label">Das Hindernis</p>
+                <p class="case-block-text">Hatte das athletische Fundament. Trainierte. Sah nicht die Ergebnisse, die das Fundament eigentlich erlaubt hätte. Das richtige System fehlte. Er dachte, das Fundament sei weg.</p>
+              </div>
+              <div>
+                <p class="case-block-label">Was sich verändert hat</p>
+                <p class="case-block-text">Das richtige System für seinen Körper und seine Geschichte. Das Fundament aktiviert. Die Ergebnisse zeigten, was die ganze Zeit verborgen war.</p>
+              </div>
+              <div class="case-quote">
+                <p>„Das Fundament war immer da. Ich habe nur nie gewusst, wie man es weckt."</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div style="text-align:center; margin-top:var(--spacing-lg); padding-top:var(--spacing-lg); border-top:1px solid var(--bg-border);">
+          <a href="angebot.html" class="btn btn--primary">Mehr herausfinden &rarr;</a>
+          <p style="font-size:0.78rem; color:var(--text-muted); margin-top:0.5rem;">Erfahre, wie das 100-Tage-Coaching für dein Profil aussieht.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== FAQ ========== -->
+    <section class="faq-section">
+      <div class="container">
+        <div class="intro">
+          <div class="section-label" style="text-align:center;">Häufige Fragen</div>
+          <h2>Was du wissen willst, bevor du startest.</h2>
+          <p>Ehrliche Antworten. Kein Marketing-Sprech.</p>
+        </div>
+        <div class="faq-list">
+
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false">
+              Was bekomme ich in den 100 Tagen genau?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a">
+              Vollständig personalisiertes 1-zu-1-Online-Coaching über 100 Tage. Dein Plan wird nach dem ersten Gespräch gebaut, basierend auf deiner sportlichen Geschichte, deinen Einschränkungen und deinem Alltag. Dazu: tägliche Kommunikation mit deinem Coach, direkte Anleitung zu Training, Ernährung und allem was dazwischen liegt, und wöchentliche 1-zu-1-Calls, in denen wir den Fortschritt besprechen und den Plan anpassen. Kein eingeschränkter Zugang. Kein Ticket-System. Direkter Draht zum Coach.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false">
+              Wie viel Zeit brauche ich pro Woche?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a">
+              Das hängt von deiner Situation ab und wird im ersten Gespräch festgelegt. Das Coaching ist gebaut für jemanden mit einem vollen 9-to-5-Job. Was für dich realistisch und effektiv ist, klären wir gemeinsam im Erstgespräch.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false">
+              Ich habe alte Verletzungen aus meiner Sportlerzeit. Kann ich trotzdem mitmachen?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a">
+              Ja. Die Verletzungs-Bibliothek enthält 50 Übungsmodifikationen für die fünf häufigsten Verletzungsbereiche aus Mannschaftssportarten: Knie, Schulter, unterer Rücken, Hüfte, Sprunggelenk. Beim Erstgespräch erfassen wir deine Einschränkungen und passen das Programm entsprechend an. Es gibt einen Unterschied zwischen "kann nicht" und "weiß nicht wie". Wir klären das im Gespräch.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false">
+              Was passiert nach Tag 100? Gibt es eine automatische Zahlung?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a">
+              Nein. Kein automatischer Abzug, kein eingegebenes Kreditkartendetail, keine versteckte Verlängerung. An Tag 90 führen wir ein kurzes Gespräch darüber, was du erreicht hast und wo du als nächstes hin willst. Wenn du weitermachen willst, gibt es das bezahlte Coaching-Programm. Wenn du aufhören willst: du behältst alle Materialien, die Community bleibt, du schuldest nichts. Deine Entscheidung.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false">
+              Was wenn ich eine Woche verpasse oder auf Dienstreise bin?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a">
+              Das 1-zu-1-Coaching ist vollständig an deine aktuelle Lebenssituation anpassbar. Wenn du auf Dienstreise bist, passt sich das Coaching an: die Ernährung wird auf Restaurants und Hotelfrühstück umgestellt, inklusive konkreter Bestellempfehlungen für spezifische Restauranttypen und Cuisine-Stile. Das Training wird auf das angepasst, was an deinem Reiseort möglich ist. Es gibt keinen Reset-Moment. Es gibt nur eine andere Version des Plans.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false">
+              Wann sehe ich erste Ergebnisse?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a">
+              Woche 1: Der Erste-Woche-Schnellgewinn ist ein spezifisches Protokoll, das dir in den ersten 7 Tagen ein konkretes körperliches Ergebnis gibt. Eine Session, die sich wie Training anfühlt, nicht wie Bewegung. Das ist der früheste spürbare Unterschied. Sichtbare Körperveränderungen folgen bei den meisten ehemaligen Athleten zwischen Woche 4 und Woche 8, weil das neurologische Fundament aus der Sportlerzeit noch da ist.
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== FINALER CTA ========== -->
+    <section class="final-cta">
+      <div class="container">
+        <span class="gold-line"></span>
+        <h2>Bereit, deine eigene Geschichte zu schreiben?</h2>
+        <p class="lead">
+          Das 100-Tage-Testprogramm kostet nichts. Kein Kreditkartendetail, kein automatischer Abzug. Du siehst, was sich verändert. Du entscheidest danach.
+        </p>
+        <a href="angebot.html" class="btn btn--primary btn--lg">
+          100 Tage kostenlos testen &rarr;
+        </a>
+        <p class="cta-meta">Kein Kreditkartendetail &middot; Kein Risiko &middot; Du entscheidest nach Ergebnissen</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Athlete Comeback Coaching &copy; 2025 &nbsp;&middot;&nbsp; <a href="#">Impressum</a> &nbsp;&middot;&nbsp; <a href="#">Datenschutz</a></p>
+    </div>
+  </footer>
+
+  <!-- FAQ Accordion -->
+  <script>
+    document.querySelectorAll('.faq-q').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var item = btn.closest('.faq-item');
+        var isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(function(i) { i.classList.remove('open'); });
+        if (!isOpen) item.classList.add('open');
+        btn.setAttribute('aria-expanded', !isOpen);
+      });
+    });
+  </script>
+
+</body>
+</html>

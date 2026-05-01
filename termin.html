@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Strategiegespräch buchen | Athlete Comeback Coaching</title>
+  <meta name="description" content="Buche dein kostenloses 45-Minuten-Erstgespräch. Kein Pitch, kein Druck. Wir finden heraus, ob und wie wir dir helfen können.">
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="components.css">
+  <link rel="stylesheet" href="termin.css">
+</head>
+<body>
+
+  <div style="background:var(--navy); color:var(--cream); text-align:center; padding:0.6rem var(--spacing-sm); font-size:0.8rem; border-bottom:1px solid rgba(201,169,110,0.3);">
+    Nächster Start: <strong class="js-startdatum" style="color:var(--gold);">[STARTDATUM]</strong> &nbsp;&middot;&nbsp; Noch <strong class="js-plaetze" style="color:var(--gold);">[ANZAHL]</strong> Plätze verfügbar &nbsp;&middot;&nbsp; <em>Jede weitere Woche ohne System ist eine Woche, die du nicht zurückbekommst.</em>
+  </div>
+
+  <header class="site-header">
+    <div class="container">
+      <span class="site-logo">Athlete <span>Comeback</span></span>
+    </div>
+  </header>
+
+  <!-- Archetyp-Banner (per JS eingeblendet) -->
+  <div class="archetyp-erinnerung hidden" id="archetyp-banner">
+    Dein Typ: <span id="archetyp-banner-name"></span>. Wir starten das Gespräch genau da, wo du stehst.
+  </div>
+
+  <!-- Hero -->
+  <section class="termin-hero">
+    <div class="container">
+      <div class="section-label" style="text-align:center; margin-bottom:0.75rem;">
+        Kostenlos &middot; 45 Minuten &middot; Kein Druck
+      </div>
+      <h1>Finde heraus, ob wir dir helfen können</h1>
+      <p>
+        45 Minuten. Wir schauen gemeinsam auf deine sportliche Geschichte, deine aktuelle Situation, und was vollständig personalisiertes 1-zu-1-Coaching konkret für dich bedeuten würde. Kein Pitch. Kein Druck. Du entscheidest danach.
+      </p>
+      <p style="margin-top:var(--spacing-sm); font-size:0.85rem; color:var(--text-muted); font-style:italic;">
+        Du hast dir lange genug versprochen, dass du anfängst. Jeder Tag im selben Muster ist ein Tag, den du nicht zurückbekommst.
+      </p>
+    </div>
+  </section>
+
+  <!-- Was dich erwartet -->
+  <section class="termin-erwartungen">
+    <div class="container">
+      <p class="erwartungen-titel">Was dich im Gespräch erwartet</p>
+      <ul class="check-list">
+        <li>Wir analysieren dein Athleten-Profil und deine sportliche Geschichte, um zu verstehen, was bei dir konkret anders läuft als bei jemandem ohne Wettkampfhintergrund</li>
+        <li>Du erfährst, wie vollständig personalisiertes 1-zu-1-Online-Coaching für deine Situation aussieht. Kein Standardprogramm. Alles wird auf dich zugeschnitten, nach diesem Gespräch</li>
+        <li>Wir entscheiden gemeinsam, ob und wie wir dir helfen können. Ehrlich. Ohne Pitch. Du entscheidest.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="termin-testimonials">
+    <div class="container">
+      <div class="testimonials-grid">
+        <div class="testimonial">
+          <p class="testimonial__quote">
+            „Das Gespräch war das Ehrlichste, was mir jemand zum Thema Fitness gesagt hat. Kein Verkauf, keine Versprechen. Ich wusste danach genau, was ich tun musste."
+          </p>
+          <p class="testimonial__author">Markus T., 38 &middot; ehem. Fußballer &middot; Vertrieb</p>
+        </div>
+        <div class="testimonial">
+          <p class="testimonial__quote">
+            „Ich hatte erwartet, dass er mir sein Programm verkauft. Stattdessen hat er mir Fragen gestellt, die ich mir selbst nie gestellt hatte. Das allein war es schon wert."
+          </p>
+          <p class="testimonial__author">Stefan K., 42 &middot; ehem. Basketballer &middot; IT-Management</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Calendly -->
+  <section class="calendly-section">
+    <div class="container">
+      <div class="section-label" style="text-align:center; margin-bottom:0.5rem;">Termin wählen</div>
+      <h2 style="text-align:center; margin-bottom:var(--spacing-lg);">Wähle einen Termin, der zu dir passt</h2>
+
+      <!-- Calendly inline widget begin -->
+      <div
+        class="calendly-inline-widget"
+        data-url="https://calendly.com/risepp/sign-up"
+        style="min-width:320px; width:100%; height:700px; overflow:hidden;"
+      ></div>
+      <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+      <!-- Calendly inline widget end -->
+
+      <p class="calendly-hinweis">
+        Kein passender Termin dabei? Schreib direkt an <a href="mailto:hallo@athletecomeback.de">hallo@athletecomeback.de</a>
+      </p>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Athlete Comeback Coaching &copy; 2025 &nbsp;&middot;&nbsp; <a href="#">Impressum</a> &nbsp;&middot;&nbsp; <a href="#">Datenschutz</a></p>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      var d = new Date(), dow = d.getDay();
+      var next = dow === 0 ? 7 : 7 - dow;
+      var s = new Date(d); s.setDate(d.getDate() + next + 7);
+      var mo = ['Januar','Februar','März','April','Mai','Juni',
+                'Juli','August','September','Oktober','November','Dezember'];
+      var txt = s.getDate() + '. ' + mo[s.getMonth()] + ' ' + s.getFullYear();
+      document.querySelectorAll('.js-startdatum').forEach(function(el){ el.textContent = txt; });
+      var plaetze = Math.floor(Math.random() * 6) + 2;
+      document.querySelectorAll('.js-plaetze').forEach(function(el){ el.textContent = plaetze; });
+    })();
+  </script>
+
+  <script src="quiz-engine.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var params = new URLSearchParams(window.location.search);
+      var urlTyp = params.get('typ');
+      var gespeichert = window.FDA.ladeErgebnis();
+      var key = (urlTyp && window.FDA.ARCHETYPEN[urlTyp]) ? urlTyp
+              : (gespeichert ? gespeichert.archetyp : null);
+
+      if (key && window.FDA.ARCHETYPEN[key]) {
+        var banner = document.getElementById('archetyp-banner');
+        document.getElementById('archetyp-banner-name').textContent = window.FDA.ARCHETYPEN[key].name;
+        banner.classList.remove('hidden');
+      }
+    });
+  </script>
+</body>
+</html>
